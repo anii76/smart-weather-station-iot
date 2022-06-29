@@ -1,0 +1,1056 @@
+[
+    {
+        "id": "6f0ae2168c0c7465",
+        "type": "tab",
+        "label": "Flow 2",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c2e45004601f74e2",
+        "type": "debug",
+        "z": "6f0ae2168c0c7465",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "3679d55b9ac8b9e9",
+        "type": "mqtt in",
+        "z": "6f0ae2168c0c7465",
+        "name": "WeatherStation/pressure",
+        "topic": "pressure",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "75575b4154e83bc0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 220,
+        "wires": [
+            [
+                "c2e45004601f74e2",
+                "7affc437fc6d74c9",
+                "ac996f36998e8e55"
+            ]
+        ]
+    },
+    {
+        "id": "944ec5492e057f56",
+        "type": "ui_gauge",
+        "z": "6f0ae2168c0c7465",
+        "name": "pressure gauge",
+        "group": "c467b276.39485",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Pressure",
+        "label": "hPa",
+        "format": "{{value|number:2}}",
+        "min": "300",
+        "max": "1100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 720,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "b6e4a75a8afb9039",
+        "type": "mqtt out",
+        "z": "6f0ae2168c0c7465",
+        "name": "test topic",
+        "topic": "testTopic",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "171132c7.ece67d",
+        "x": 800,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "7affc437fc6d74c9",
+        "type": "switch",
+        "z": "6f0ae2168c0c7465",
+        "name": "filter input",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "push",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 420,
+        "y": 280,
+        "wires": [
+            [
+                "385b829975193e6f"
+            ]
+        ]
+    },
+    {
+        "id": "385b829975193e6f",
+        "type": "change",
+        "z": "6f0ae2168c0c7465",
+        "name": "send message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "recieved",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 280,
+        "wires": [
+            [
+                "b6e4a75a8afb9039"
+            ]
+        ]
+    },
+    {
+        "id": "ada3b6354ef9dc39",
+        "type": "mqtt in",
+        "z": "6f0ae2168c0c7465",
+        "name": "WeatherStation/dust",
+        "topic": "dust",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "75575b4154e83bc0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 380,
+        "wires": [
+            [
+                "6da210ffd0f1213a",
+                "600d9ee7c482d77f"
+            ]
+        ]
+    },
+    {
+        "id": "a81197ba7b9d1f9a",
+        "type": "mqtt in",
+        "z": "6f0ae2168c0c7465",
+        "name": "WeatherStation/Wind direction",
+        "topic": "windDirection",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "75575b4154e83bc0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 520,
+        "wires": [
+            [
+                "4ca19e9367996c34",
+                "e74bf5c15639e2d1"
+            ]
+        ]
+    },
+    {
+        "id": "f91e15361ef0d897",
+        "type": "mqtt in",
+        "z": "6f0ae2168c0c7465",
+        "name": "WeatherStation/Rain",
+        "topic": "rain",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "75575b4154e83bc0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 760,
+        "wires": [
+            [
+                "89c57308c41a58fb"
+            ]
+        ]
+    },
+    {
+        "id": "ac996f36998e8e55",
+        "type": "function",
+        "z": "6f0ae2168c0c7465",
+        "name": "pascal to hecto",
+        "func": "msg.payload *= 0.01;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 220,
+        "wires": [
+            [
+                "944ec5492e057f56"
+            ]
+        ]
+    },
+    {
+        "id": "2bbf72bc3c73a310",
+        "type": "mqtt in",
+        "z": "6f0ae2168c0c7465",
+        "name": "WeatherStation/Humidity",
+        "topic": "humidity",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "75575b4154e83bc0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 880,
+        "wires": [
+            [
+                "b026fbaf67214e18"
+            ]
+        ]
+    },
+    {
+        "id": "6da210ffd0f1213a",
+        "type": "ui_gauge",
+        "z": "6f0ae2168c0c7465",
+        "name": "Dust gauge",
+        "group": "64a9c0bb4e9661f5",
+        "order": 17,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Dust",
+        "label": "µg/m3",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b377",
+            "#b3ea7b",
+            "#b0c9b5"
+        ],
+        "seg1": "30",
+        "seg2": "50",
+        "className": "",
+        "x": 670,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "171aa6d85e07cf69",
+        "type": "mqtt in",
+        "z": "6f0ae2168c0c7465",
+        "name": "WeatherStation/Wind speed",
+        "topic": "windSpeed",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "75575b4154e83bc0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 700,
+        "wires": [
+            [
+                "e71283e2a36c61a9"
+            ]
+        ]
+    },
+    {
+        "id": "5e7e05d791e7d857",
+        "type": "mqtt in",
+        "z": "6f0ae2168c0c7465",
+        "name": "WeatherStation/Light",
+        "topic": "light",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "75575b4154e83bc0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 960,
+        "wires": [
+            [
+                "dbc003c378d0445d",
+                "d817fbc1c5d3de81"
+            ]
+        ]
+    },
+    {
+        "id": "f90cf44ce4b39ab6",
+        "type": "mqtt in",
+        "z": "6f0ae2168c0c7465",
+        "name": "WeatherStation/Temperature",
+        "topic": "temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "75575b4154e83bc0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 1020,
+        "wires": [
+            [
+                "2ffda194bb6ca8a7",
+                "8fa1888a8d349720",
+                "a6a1108dea562ba7"
+            ]
+        ]
+    },
+    {
+        "id": "d817fbc1c5d3de81",
+        "type": "ui_gauge",
+        "z": "6f0ae2168c0c7465",
+        "name": "",
+        "group": "f5959d3849acfa54",
+        "order": 17,
+        "width": 0,
+        "height": 0,
+        "gtype": "donut",
+        "title": "Light",
+        "label": "Lux",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "2000",
+        "colors": [
+            "#000080",
+            "#c0c0c0",
+            "#ffff80"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 670,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "dbc003c378d0445d",
+        "type": "ui_chart",
+        "z": "6f0ae2168c0c7465",
+        "name": "",
+        "group": "f5959d3849acfa54",
+        "order": 18,
+        "width": 0,
+        "height": 0,
+        "label": "Light chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 690,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "600d9ee7c482d77f",
+        "type": "switch",
+        "z": "6f0ae2168c0c7465",
+        "name": "dust gravity",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "30",
+                "vt": "str"
+            },
+            {
+                "t": "btwn",
+                "v": "30",
+                "vt": "num",
+                "v2": "50",
+                "v2t": "num"
+            },
+            {
+                "t": "gte",
+                "v": "50",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 470,
+        "y": 440,
+        "wires": [
+            [
+                "39ebc49f5326b178"
+            ],
+            [
+                "84378cb384f51b09"
+            ],
+            [
+                "ee560841adcb5547"
+            ]
+        ]
+    },
+    {
+        "id": "39ebc49f5326b178",
+        "type": "change",
+        "z": "6f0ae2168c0c7465",
+        "name": "send message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Healthy",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 420,
+        "wires": [
+            [
+                "98ccf3a18e420699"
+            ]
+        ]
+    },
+    {
+        "id": "84378cb384f51b09",
+        "type": "change",
+        "z": "6f0ae2168c0c7465",
+        "name": "send message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Serious health issues",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 460,
+        "wires": [
+            [
+                "98ccf3a18e420699"
+            ]
+        ]
+    },
+    {
+        "id": "ee560841adcb5547",
+        "type": "change",
+        "z": "6f0ae2168c0c7465",
+        "name": "send message",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Dangerous",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 500,
+        "wires": [
+            [
+                "98ccf3a18e420699"
+            ]
+        ]
+    },
+    {
+        "id": "98ccf3a18e420699",
+        "type": "ui_text",
+        "z": "6f0ae2168c0c7465",
+        "group": "64a9c0bb4e9661f5",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Air quality",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 860,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e71283e2a36c61a9",
+        "type": "ui_gauge",
+        "z": "6f0ae2168c0c7465",
+        "name": "Wind speed gauge",
+        "group": "aa885ef84d384fdf",
+        "order": 19,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Wind speed",
+        "label": "km/h",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "20",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 610,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "9393aeb7e03490ca",
+        "type": "ui_text",
+        "z": "6f0ae2168c0c7465",
+        "group": "7db45a2e2009a112",
+        "order": 3,
+        "width": 3,
+        "height": 1,
+        "name": "Digital time",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "digital_time",
+        "x": 150,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "e74bf5c15639e2d1",
+        "type": "ui_gauge",
+        "z": "6f0ae2168c0c7465",
+        "name": "Wind direction",
+        "group": "aa885ef84d384fdf",
+        "order": 0,
+        "width": "0",
+        "height": "0",
+        "gtype": "compass",
+        "title": "",
+        "label": "Wind Direction",
+        "format": "",
+        "min": 0,
+        "max": "359",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 760,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "89c57308c41a58fb",
+        "type": "ui_gauge",
+        "z": "6f0ae2168c0c7465",
+        "name": "",
+        "group": "c467b276.39485",
+        "order": 19,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Rain value",
+        "label": "mm",
+        "format": "{{value}}",
+        "min": 0,
+        "max": 10,
+        "colors": [
+            "#004db3",
+            "#a8e2f5",
+            "#bacb3a"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 610,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "b026fbaf67214e18",
+        "type": "ui_gauge",
+        "z": "6f0ae2168c0c7465",
+        "name": "",
+        "group": "64a9c0bb4e9661f5",
+        "order": 17,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Humidity",
+        "label": "% RH",
+        "format": "{{value}}",
+        "min": "10",
+        "max": "90",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 580,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "2ffda194bb6ca8a7",
+        "type": "ui_gauge",
+        "z": "6f0ae2168c0c7465",
+        "name": "",
+        "group": "727186623e16b9f1",
+        "order": 18,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature",
+        "label": "degrees",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "60",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "25",
+        "seg2": "45",
+        "className": "",
+        "x": 590,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "8fa1888a8d349720",
+        "type": "ui_text",
+        "z": "6f0ae2168c0c7465",
+        "group": "727186623e16b9f1",
+        "order": 17,
+        "width": "0",
+        "height": "0",
+        "name": "temp",
+        "label": "",
+        "format": "{{msg.payload}} C°",
+        "layout": "col-center",
+        "className": "",
+        "x": 570,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "a6a1108dea562ba7",
+        "type": "ui_chart",
+        "z": "6f0ae2168c0c7465",
+        "name": "",
+        "group": "727186623e16b9f1",
+        "order": 18,
+        "width": 0,
+        "height": 0,
+        "label": "Temperature chart",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 610,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4b7e4e92bf7c3905",
+        "type": "remote-access",
+        "z": "6f0ae2168c0c7465",
+        "confignode": "2fa550c615efd714",
+        "name": "",
+        "verbose": 0,
+        "x": 160,
+        "y": 1140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "536dabcb2a87bda5",
+        "type": "mqtt in",
+        "z": "6f0ae2168c0c7465",
+        "name": "WeatherStation/Raining",
+        "topic": "raining",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "75575b4154e83bc0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 820,
+        "wires": [
+            [
+                "3b827c10bec5b8e9"
+            ]
+        ]
+    },
+    {
+        "id": "3b827c10bec5b8e9",
+        "type": "ui_text",
+        "z": "6f0ae2168c0c7465",
+        "group": "c467b276.39485",
+        "order": 18,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Il pleut ? ",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 600,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "cecfe1a03e3a8ac4",
+        "type": "mqtt in",
+        "z": "6f0ae2168c0c7465",
+        "name": "WeatherStation/altitude",
+        "topic": "altitude",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "75575b4154e83bc0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 120,
+        "wires": [
+            [
+                "c22e27c243713e4f"
+            ]
+        ]
+    },
+    {
+        "id": "c22e27c243713e4f",
+        "type": "ui_text",
+        "z": "6f0ae2168c0c7465",
+        "group": "c467b276.39485",
+        "order": 20,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Altitude",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 500,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "4ca19e9367996c34",
+        "type": "debug",
+        "z": "6f0ae2168c0c7465",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 450,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "a44d6d52a45d2687",
+        "type": "mqtt in",
+        "z": "6f0ae2168c0c7465",
+        "name": "WeatherStation/Wind direction",
+        "topic": "windDir",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "75575b4154e83bc0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 200,
+        "y": 600,
+        "wires": [
+            [
+                "0d495aaa1e60551d"
+            ]
+        ]
+    },
+    {
+        "id": "0d495aaa1e60551d",
+        "type": "ui_text",
+        "z": "6f0ae2168c0c7465",
+        "group": "aa885ef84d384fdf",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Direction",
+        "label": "Direction",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 740,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "75575b4154e83bc0",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.43.169",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "c467b276.39485",
+        "type": "ui_group",
+        "name": "Outside",
+        "tab": "7894fc0d.fc8084",
+        "order": 1,
+        "disp": true,
+        "width": "7"
+    },
+    {
+        "id": "171132c7.ece67d",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "64a9c0bb4e9661f5",
+        "type": "ui_group",
+        "name": "Air quality",
+        "tab": "7894fc0d.fc8084",
+        "order": 5,
+        "disp": true,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f5959d3849acfa54",
+        "type": "ui_group",
+        "name": "Light",
+        "tab": "7894fc0d.fc8084",
+        "order": 3,
+        "disp": true,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "aa885ef84d384fdf",
+        "type": "ui_group",
+        "name": "Wind",
+        "tab": "7894fc0d.fc8084",
+        "order": 4,
+        "disp": true,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7db45a2e2009a112",
+        "type": "ui_group",
+        "name": "",
+        "tab": "eb94216d.968598",
+        "order": 1,
+        "disp": true,
+        "width": 25,
+        "collapse": false,
+        "className": "clock"
+    },
+    {
+        "id": "727186623e16b9f1",
+        "type": "ui_group",
+        "name": "Weather Station",
+        "tab": "7894fc0d.fc8084",
+        "order": 2,
+        "disp": true,
+        "width": "7",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2fa550c615efd714",
+        "type": "remote-config",
+        "name": "Node-RED UI",
+        "host": "localhost",
+        "protocol": "http",
+        "port": "1880",
+        "baseurl": "/ui",
+        "instancehash": "vux1k0bfaoyp4mi2t73nped6j7h8yl8koua2wusocefvomndrftgzfct18foig8u",
+        "server": "nodered02.remote-red.com",
+        "region": "de"
+    },
+    {
+        "id": "7894fc0d.fc8084",
+        "type": "ui_tab",
+        "name": "Climate",
+        "icon": "dashboard",
+        "order": 1
+    },
+    {
+        "id": "eb94216d.968598",
+        "type": "ui_tab",
+        "name": "Industrial Shields",
+        "icon": "",
+        "order": 5,
+        "disabled": false,
+        "hidden": false
+    }
+]
